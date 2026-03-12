@@ -28,7 +28,7 @@
                 ?>
                 <?php foreach ($tasks as $task) : ?>
                     <div class="task" data-id="<?= $task['id'] ?>">
-                        <h3><?= $task['titel'] ?></h3>
+                        <a href = "tasks/details.php?id=<?= $task['id'] ?>"><?= $task['titel'] ?></a>
                         <p><?= $task['beschrijving'] ?></p>
                     </div>
                 <?php endforeach; ?>
