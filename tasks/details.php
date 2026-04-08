@@ -1,3 +1,12 @@
+    <?php
+    session_start();
+if(!isset($_SESSION['user_id']))
+    {
+        $msg = "Je moet eerst inloggen!";
+        header("Location: ../login.php?msg=$msg");
+        exit;
+    }
+?>
 <!doctype html>
 <html lang="nl">
 
@@ -18,6 +27,7 @@
          ]);
           $task = $statement->fetch(PDO::FETCH_ASSOC);
       ?>
+   
       
       <h1><?php echo $task['titel']; ?></h1>
       <p><?php echo $task['beschrijving']; ?></p>

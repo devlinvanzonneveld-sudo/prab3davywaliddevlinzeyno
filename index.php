@@ -1,3 +1,12 @@
+    <?php
+    session_start();
+if(!isset($_SESSION['user_id']))
+    {
+        $msg = "Je moet eerst inloggen!";
+        header("Location: login.php?msg=$msg");
+        exit;
+    }
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -25,6 +34,7 @@
 
 
 <body>
+
 
     <div class="board-container">
         <h1 class="board-title">TakenLijst</h1>

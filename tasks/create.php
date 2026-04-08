@@ -1,3 +1,12 @@
+    <?php
+    session_start();
+if(!isset($_SESSION['user_id']))
+    {
+        $msg = "Je moet eerst inloggen!";
+        header("Location: ../login.php?msg=$msg");
+        exit;
+    }
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -7,6 +16,7 @@
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
+ 
     <div class="container">
         <img src="../img/logo.png" alt="Pretpark Logo">
         <h1>Nieuwe taak toevoegen</h1>
