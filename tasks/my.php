@@ -45,6 +45,10 @@ require_once '../backend/conn.php';
             <div class="column">
                 <h2>To Do</h2>
                 <?php
+                
+                
+                
+         
                 /*
                  * OPDRACHTDEEL 1:
                  * Schrijf een SELECT query die alle taken ophaalt WHERE:
@@ -57,12 +61,13 @@ require_once '../backend/conn.php';
                  * Kijk in tasksController.php hoe de user in de database wordt opgeslagen.
                  */
                 
-                $statement = $conn->prepare("SELECT * FROM taken WHERE TODO_PUT_CONDITIONS_HERE ORDER BY deadline ASC");
+                $statement = $conn->prepare("SELECT * FROM taken WHERE status = :status AND user = :user ORDER BY deadline ASC");
                 $statement->execute([
                     // HINT: Welke parameters moet je hier binden?
                     // Je hebt de status EN het user_id nodig
                     ':status' => 'todo',
                     // TODO: Voeg hier de user binding toe
+                    ':user' => $current_user_id
                 ]);
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
@@ -82,10 +87,11 @@ require_once '../backend/conn.php';
                 // OPDRACHTDEEL 2: Herhaal dezelfde query als hierboven, maar verander 'todo' naar 'in progress'
                 // Kopieer de code van hierboven en pas de status aan
                 
-                $statement = $conn->prepare("SELECT * FROM taken WHERE TODO_PUT_CONDITIONS_HERE ORDER BY deadline ASC");
+                $statement = $conn->prepare("SELECT * FROM taken WHERE status = :status AND user = :user ORDER BY deadline ASC");
                 $statement->execute([
                     ':status' => 'in progress',
                     // TODO: Bind user_id hier ook
+                    ':user' => $current_user_id
                 ]);
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
@@ -104,10 +110,10 @@ require_once '../backend/conn.php';
                 <?php
                 // OPDRACHTDEEL 3: Doe hetzelfde voor 'review' status
                 
-                $statement = $conn->prepare("SELECT * FROM taken WHERE TODO_PUT_CONDITIONS_HERE ORDER BY deadline ASC");
+                $statement = $conn->prepare("SELECT * FROM taken WHERE status = :status AND user = :user ORDER BY deadline ASC");
                 $statement->execute([
                     ':status' => 'review',
-                    // TODO: Bind user_id
+                    ':user' => $current_user_id
                 ]);
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
@@ -126,10 +132,10 @@ require_once '../backend/conn.php';
                 <?php
                 // OPDRACHTDEEL 4: Nog een keer voor de 'done' status
                 
-                $statement = $conn->prepare("SELECT * FROM taken WHERE TODO_PUT_CONDITIONS_HERE ORDER BY deadline ASC");
+                $statement = $conn->prepare("SELECT * FROM taken WHERE status = :status AND user = :user ORDER BY deadline ASC");
                 $statement->execute([
                     ':status' => 'done',
-                    // TODO: Bind user_id
+                    ':user' => $current_user_id
                 ]);
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
