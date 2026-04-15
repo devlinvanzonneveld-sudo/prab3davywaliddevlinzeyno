@@ -18,6 +18,11 @@ if(!isset($_SESSION['user_id']))
     <div style="text-align:center; margin-top:60px;">
         <img src="img/logo.png" alt="Pretpark Logo" style="max-width:200px;">
         <h1>Welkom bij het Pretpark Takenbord</h1>
+        <?php if (isset($_GET['msg'])): ?>
+            <div class="success-message" style="color: green; font-weight: bold; margin-bottom: 20px;">
+                <?= htmlspecialchars($_GET['msg']) ?>
+            </div>
+        <?php endif; ?>
         <p>Beheer eenvoudig alle taken van het park.</p>
         <a href="tasks/index.php" style="font-size:1.2em; padding:10px 20px; background:#0078d4; color:#fff; border-radius:5px; text-decoration:none;">Ga naar takenoverzicht</a>
     </div>
