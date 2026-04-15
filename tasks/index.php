@@ -20,7 +20,10 @@ require_once '../backend/conn.php';
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-    <a href="../index.php">Terug naar home</a>
+    <div style="margin-bottom:20px;">
+        <a href="../index.php" style="padding:8px 12px; background:#0078d4; color:white; text-decoration:none; border-radius:3px; margin-right:10px;">Terug naar home</a>
+        <a href="my.php" style="padding:8px 12px; background:#107c10; color:white; text-decoration:none; border-radius:3px;">Mijn Taken</a>
+    </div>
     <?php if (isset($_GET['edit_success']) && $_GET['edit_success'] == 1): ?>
         <div class="success-message" style="max-width:600px;margin:20px auto;">Taak succesvol bijgewerkt!</div>
     <?php endif; ?>
