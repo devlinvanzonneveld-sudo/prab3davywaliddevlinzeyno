@@ -53,6 +53,7 @@ require_once '../backend/conn.php';
                 foreach ($tasks as $task) : ?>
                     <div class="task" data-id="<?= $task['id'] ?>" style="position:relative;">
                         <a href="details.php?id=<?= $task['id'] ?>" style="font-weight:bold; color:#0078d4;"><?= $task['titel'] ?></a>
+                        <p style="margin:5px 0 0 0; font-size:0.9em; color:#666;"><strong>Afdeling:</strong> <?= htmlspecialchars($task['afdeling']) ?></p>
                         <a href="delete.php?id=<?= $task['id'] ?>" onclick="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');" style="position:absolute; top:8px; right:8px;">
                             <img src="../img/delete.png" alt="Verwijder" style="width:18px; height:18px; vertical-align:middle; opacity:0.7;">
                         </a>
@@ -70,6 +71,7 @@ require_once '../backend/conn.php';
                 foreach ($tasks as $task) : ?>
                     <div class="task" data-id="<?= $task['id'] ?>" style="position:relative;">
                         <a href="details.php?id=<?= $task['id'] ?>" style="font-weight:bold; color:#0078d4;"><?= $task['titel'] ?></a>
+                        <p style="margin:5px 0 0 0; font-size:0.9em; color:#666;"><strong>Afdeling:</strong> <?= htmlspecialchars($task['afdeling']) ?></p>
                         <a href="delete.php?id=<?= $task['id'] ?>" onclick="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');" style="position:absolute; top:8px; right:8px;">
                             <img src="../img/delete.png" alt="Verwijder" style="width:18px; height:18px; vertical-align:middle; opacity:0.7;">
                         </a>
@@ -87,6 +89,7 @@ require_once '../backend/conn.php';
                 foreach ($tasks as $task) : ?>
                     <div class="task" data-id="<?= $task['id'] ?>" style="position:relative;">
                         <a href="details.php?id=<?= $task['id'] ?>" style="font-weight:bold; color:#0078d4;"><?= $task['titel'] ?></a>
+                        <p style="margin:5px 0 0 0; font-size:0.9em; color:#666;"><strong>Afdeling:</strong> <?= htmlspecialchars($task['afdeling']) ?></p>
                         <a href="delete.php?id=<?= $task['id'] ?>" onclick="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');" style="position:absolute; top:8px; right:8px;">
                             <img src="../img/delete.png" alt="Verwijder" style="width:18px; height:18px; vertical-align:middle; opacity:0.7;">
                         </a>
@@ -104,6 +107,7 @@ require_once '../backend/conn.php';
                 foreach ($tasks as $task) : ?>
                     <div class="task" data-id="<?= $task['id'] ?>" style="position:relative;">
                         <a href="details.php?id=<?= $task['id'] ?>" style="font-weight:bold; color:#0078d4;"><?= $task['titel'] ?></a>
+                        <p style="margin:5px 0 0 0; font-size:0.9em; color:#666;"><strong>Afdeling:</strong> <?= htmlspecialchars($task['afdeling']) ?></p>
                         <a href="delete.php?id=<?= $task['id'] ?>" onclick="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');" style="position:absolute; top:8px; right:8px;">
                             <img src="../img/delete.png" alt="Verwijder" style="width:18px; height:18px; vertical-align:middle; opacity:0.7;">
                         </a>
