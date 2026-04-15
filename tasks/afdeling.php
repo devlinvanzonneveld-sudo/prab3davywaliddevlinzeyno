@@ -7,7 +7,12 @@ if(!isset($_SESSION['user_id']))
         exit;
     }
 
+$afdeling = isset($_GET['afdeling']) ? $_GET['afdeling'] : '';
 
+if ($afdeling === '') {
+    header("Location: index.php");
+    exit;
+}
 
 require_once '../head.php';
 require_once '../backend/conn.php';
@@ -16,11 +21,12 @@ require_once '../backend/conn.php';
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>TakenLijst</title>
+    <title>TakenLijst - <?= htmlspecialchars($afdeling) ?></title>
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
     <a href="../index.php">Terug naar home</a>
+    <a href="index.php" style="margin-left:20px;">Terug naar alle taken</a>
     <?php if (isset($_GET['edit_success']) && $_GET['edit_success'] == 1): ?>
         <div class="success-message" style="max-width:600px;margin:20px auto;">Taak succesvol bijgewerkt!</div>
     <?php endif; ?>
@@ -28,24 +34,15 @@ require_once '../backend/conn.php';
         <div class="error-message" style="max-width:600px;margin:20px auto;">Taak succesvol verwijderd!</div>
     <?php endif; ?>
     <div class="board-container">
-        <h1 class="board-title">TakenLijst</h1>
+        <h1 class="board-title">TakenLijst - Afdeling: <?= htmlspecialchars($afdeling) ?></h1>
         <a id="addTask" href="create.php" class="new-task-btn">+ Nieuwe Taak</a>
         <a href="done.php" style="margin-left:20px;">Bekijk afgeronde taken</a>
-        <div style="margin-top:20px; margin-bottom:20px;">
-            <strong>Filteren op afdeling:</strong>
-            <a href="afdeling.php?afdeling=personeel" style="margin-left:10px; padding:5px 10px; background:#e0e0e0; border-radius:3px; text-decoration:none;">Personeel</a>
-            <a href="afdeling.php?afdeling=horeca" style="margin-left:5px; padding:5px 10px; background:#e0e0e0; border-radius:3px; text-decoration:none;">Horeca</a>
-            <a href="afdeling.php?afdeling=techniek" style="margin-left:5px; padding:5px 10px; background:#e0e0e0; border-radius:3px; text-decoration:none;">Techniek</a>
-            <a href="afdeling.php?afdeling=inkoop" style="margin-left:5px; padding:5px 10px; background:#e0e0e0; border-radius:3px; text-decoration:none;">Inkoop</a>
-            <a href="afdeling.php?afdeling=klantenservice" style="margin-left:5px; padding:5px 10px; background:#e0e0e0; border-radius:3px; text-decoration:none;">Klantenservice</a>
-            <a href="afdeling.php?afdeling=groen" style="margin-left:5px; padding:5px 10px; background:#e0e0e0; border-radius:3px; text-decoration:none;">Groen</a>
-        </div>
         <div class="board">
             <div class="column">
                 <h2>To Do</h2>
                 <?php
-                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'todo' ORDER BY deadline ASC");
-                $statement->execute();
+                $statement = $conn->prepare("SELECT * FROM taken WHERE afdeling = :afdeling AND status = 'todo' ORDER BY deadline ASC");
+                $statement->execute([':afdeling' => $afdeling]);
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
                     <div class="task" data-id="<?= $task['id'] ?>" style="position:relative;">
@@ -61,8 +58,8 @@ require_once '../backend/conn.php';
             <div class="column">
                 <h2>Progress</h2>
                 <?php
-                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'in progress' ORDER BY deadline ASC");
-                $statement->execute();
+                $statement = $conn->prepare("SELECT * FROM taken WHERE afdeling = :afdeling AND status = 'in progress' ORDER BY deadline ASC");
+                $statement->execute([':afdeling' => $afdeling]);
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
                     <div class="task" data-id="<?= $task['id'] ?>" style="position:relative;">
@@ -78,8 +75,8 @@ require_once '../backend/conn.php';
             <div class="column">
                 <h2>Review</h2>
                 <?php
-                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'review' ORDER BY deadline ASC");
-                $statement->execute();
+                $statement = $conn->prepare("SELECT * FROM taken WHERE afdeling = :afdeling AND status = 'review' ORDER BY deadline ASC");
+                $statement->execute([':afdeling' => $afdeling]);
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
                     <div class="task" data-id="<?= $task['id'] ?>" style="position:relative;">
@@ -95,8 +92,8 @@ require_once '../backend/conn.php';
             <div class="column">
                 <h2>Done</h2>
                 <?php
-                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'done' ORDER BY deadline ASC");
-                $statement->execute();
+                $statement = $conn->prepare("SELECT * FROM taken WHERE afdeling = :afdeling AND status = 'done' ORDER BY deadline ASC");
+                $statement->execute([':afdeling' => $afdeling]);
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
                     <div class="task" data-id="<?= $task['id'] ?>" style="position:relative;">
