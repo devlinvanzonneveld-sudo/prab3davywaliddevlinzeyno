@@ -10,7 +10,8 @@ if(!isset($_SESSION['user_id']))
 
 require_once '../backend/conn.php';
 
-$sql = "SELECT titel, afdeling FROM taken WHERE status = 'done'";
+
+$sql = "SELECT titel, afdeling, deadline FROM taken WHERE status = 'done' ORDER BY deadline ASC";
 
 
 $stmt = $conn->prepare($sql);
@@ -41,6 +42,7 @@ $taken = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                         <th>Titel</th>
                         <th>Afdeling</th>
+                        <th>Deadline</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +50,7 @@ $taken = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <tr>
                             <td><?= htmlspecialchars($taak['titel']) ?></td>
                             <td><?= htmlspecialchars($taak['afdeling']) ?></td>
+                            <td><?= htmlspecialchars($taak['deadline']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

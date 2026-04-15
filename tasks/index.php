@@ -35,7 +35,7 @@ require_once '../backend/conn.php';
             <div class="column">
                 <h2>To Do</h2>
                 <?php
-                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'todo'");
+                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'todo' ORDER BY deadline ASC");
                 $statement->execute();
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
@@ -45,13 +45,14 @@ require_once '../backend/conn.php';
                             <img src="../img/delete.png" alt="Verwijder" style="width:18px; height:18px; vertical-align:middle; opacity:0.7;">
                         </a>
                         <p><?= $task['beschrijving'] ?></p>
+                        <p><strong>Deadline:</strong> <?= htmlspecialchars($task['deadline']) ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>
             <div class="column">
                 <h2>Progress</h2>
                 <?php
-                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'in progress'");
+                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'in progress' ORDER BY deadline ASC");
                 $statement->execute();
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
@@ -61,13 +62,14 @@ require_once '../backend/conn.php';
                             <img src="../img/delete.png" alt="Verwijder" style="width:18px; height:18px; vertical-align:middle; opacity:0.7;">
                         </a>
                         <p><?= $task['beschrijving'] ?></p>
+                        <p><strong>Deadline:</strong> <?= htmlspecialchars($task['deadline']) ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>
             <div class="column">
                 <h2>Review</h2>
                 <?php
-                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'review'");
+                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'review' ORDER BY deadline ASC");
                 $statement->execute();
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
@@ -77,13 +79,14 @@ require_once '../backend/conn.php';
                             <img src="../img/delete.png" alt="Verwijder" style="width:18px; height:18px; vertical-align:middle; opacity:0.7;">
                         </a>
                         <p><?= $task['beschrijving'] ?></p>
+                        <p><strong>Deadline:</strong> <?= htmlspecialchars($task['deadline']) ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>
             <div class="column">
                 <h2>Done</h2>
                 <?php
-                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'done'");
+                $statement = $conn->prepare("SELECT * FROM taken WHERE status = 'done' ORDER BY deadline ASC");
                 $statement->execute();
                 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tasks as $task) : ?>
@@ -93,6 +96,7 @@ require_once '../backend/conn.php';
                             <img src="../img/delete.png" alt="Verwijder" style="width:18px; height:18px; vertical-align:middle; opacity:0.7;">
                         </a>
                         <p><?= $task['beschrijving'] ?></p>
+                        <p><strong>Deadline:</strong> <?= htmlspecialchars($task['deadline']) ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>

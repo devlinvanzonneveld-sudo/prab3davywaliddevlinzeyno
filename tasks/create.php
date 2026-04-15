@@ -23,6 +23,11 @@ if(!isset($_SESSION['user_id']))
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
             <div class="success-message">Taak succesvol toegevoegd!</div>
         <?php endif; ?>
+        <?php if (isset($_GET['error'])): ?>
+            <div class="error-message" style="color: red; font-weight: bold; margin-bottom: 20px;">
+                <?= htmlspecialchars($_GET['error']) ?>
+            </div>
+        <?php endif; ?>
         <form action="../app/Http/Controllers/tasksController.php" method="POST">
             <input type="hidden" name="action" value="create">
             <div class="form-group">
@@ -44,6 +49,10 @@ if(!isset($_SESSION['user_id']))
                     <option value="klantenservice">Klantenservice</option>
                     <option value="groen">Groen</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="deadline">Deadline:</label>
+                <input type="date" name="deadline" id="deadline" class="form-input" required>
             </div>
             <button type="submit">Toevoegen</button>
         </form>
